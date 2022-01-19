@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Men</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap");
+    </style>
     <script src="mensData.js"></script>
   </head>
   <body>
@@ -21,17 +24,17 @@
       </div>
     </div>
     <div class="selects">
-      <select id="sortPrice" onchange="sortPrice()">
-        <option value="">Sort by Price</option>
+      <span>Sort:</span><select id="sortPrice" onchange="sortPrice()">
+        <option value="">Best Match</option>
         <option value="low">Low to High</option>
         <option value="high">High to Low</option>
       </select>
-      <select id="selectBrand" onchange="filterBrand()">
+      <!-- <select id="selectBrand" onchange="filterBrand()">
         <option value="">Filter by Brands</option>
         <option value="Nike">Nike</option>
         <option value="adidas">Adidas</option>
         <option value="puma">Puma</option>
-      </select>
+      </select> -->
     </div>
     <div id="container"></div>
   </body>
@@ -71,8 +74,8 @@
     document.querySelector("#container").innerHTML = "";
 
     mensData.map(function (elem) {
-      var div1 = document.createElement("div");
-      div1.setAttribute("class", "card");
+      var card = document.createElement("div");
+      card.setAttribute("class", "card");
 
       var image = document.createElement("img");
       image.setAttribute("src", elem.link);
@@ -96,22 +99,31 @@
       //   p2.setAttribute("class", "strikeoff");
       //   p2.textContent = "₹" + elem.strikedoffprice;
 
-      //   div2.append(p1, p2);
+      // card.append(p1, p2);
+      var buttons = document.createElement("div");
+      buttons.setAttribute("class", "buttons");
+
+      var btnBO = document.createElement("button");
+      btnBO.setAttribute("class", "btn2");
+      btnBO.textContent = "See Details";
+      btnBO.addEventListener("click", function () {
+      });
 
       var btn = document.createElement("button");
       btn.setAttribute("class", "btn");
-      btn.textContent = "Add To Cart";
+      btn.textContent = "Buying Options";
       btn.addEventListener("click", function () {
         addToCart(elem);
       });
 
-      div1.append(image, name, p1, btn);
-      document.querySelector("#container").append(div1);
+      buttons.append(btnBO, btn)
+      card.append(image, name, p1, buttons);
+      document.querySelector("#container").append(card);
 
       function addToCart(elem) {
         cartItems.push(elem);
         localStorage.setItem("CartArray", JSON.stringify(cartItems));
-        alert(elem.name + " added to Cart");
+        alert(elem.title + " added to Cart");
       }
     });
   }
