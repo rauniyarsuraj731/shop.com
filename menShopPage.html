@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Men</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="mensData.js"></script>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="left">Men</div>
+      <div class="right">
+        <div onclick="window.location.href='home.html'">Home</div>
+        <div onclick="window.location.href='men.html'">Men</div>
+        <div onclick="window.location.href='women.html'">Women</div>
+        <div onclick="window.location.href='cart.html'">Cart</div>
+        <div onclick="window.location.href='login.html'">Sign In</div>
+        <div onclick="window.location.href='signup.html'">Create Account</div>
+      </div>
+    </div>
+    <div class="selects">
+      <select id="sortPrice" onchange="sortPrice()">
+        <option value="">Sort by Price</option>
+        <option value="low">Low to High</option>
+        <option value="high">High to Low</option>
+      </select>
+      <select id="selectBrand" onchange="filterBrand()">
+        <option value="">Filter by Brands</option>
+        <option value="Nike">Nike</option>
+        <option value="adidas">Adidas</option>
+        <option value="puma">Puma</option>
+      </select>
+    </div>
+    <div id="container"></div>
+  </body>
+</html>
+
+<script>
+  var mensData = JSON.parse(localStorage.getItem("menData")) || [];
+  var cartItems = JSON.parse(localStorage.getItem("CartArray")) || [];
+
+  populate(mensData);
+
+  function sortPrice() {
+    var selected = document.querySelector("#sortPrice").value;
+    console.log(selected);
+    if (selected == "high") {
+      mensData.sort(function (a, b) {
+        return Number(b.price) - Number(a.price);
+      });
+    } else if (selected == "low") {
+      mensData.sort(function (a, b) {
+        return Number(a.price) - Number(b.price);
+      });
+    }
+    populate(mensData);
+  }
+
+  //   function filterBrand() {
+  //     var selected = document.querySelector("#selectBrand").value;
+  //     var filteredArray = mensData.filter(function (elem) {
+  //       return elem.brand == selected;
+  //     });
+  //     console.log(filteredArray);
+  //     populate(filteredArray);
+  //   }
+
+  function populate(mensData) {
+    document.querySelector("#container").innerHTML = "";
+
+    mensData.map(function (elem) {
+      var div1 = document.createElement("div");
+      div1.setAttribute("class", "card");
+
+      var image = document.createElement("img");
+      image.setAttribute("src", elem.link);
+
+      var name = document.createElement("p");
+      name.setAttribute("class", "name");
+      name.textContent = elem.title;
+
+      var p1 = document.createElement("p");
+      p1.setAttribute("class", "price");
+      p1.textContent = "$" + elem.price;
+
+      //   var div2 = document.createElement("div");
+      //   div2.setAttribute("class", "flex");
+
+      //   var p1 = document.createElement("p");
+      //   p1.setAttribute("class", "price");
+      //   p1.textContent = "₹" + elem.price;
+
+      //   var p2 = document.createElement("p");
+      //   p2.setAttribute("class", "strikeoff");
+      //   p2.textContent = "₹" + elem.strikedoffprice;
+
+      //   div2.append(p1, p2);
+
+      var btn = document.createElement("button");
+      btn.setAttribute("class", "btn");
+      btn.textContent = "Add To Cart";
+      btn.addEventListener("click", function () {
+        addToCart(elem);
+      });
+
+      div1.append(image, name, p1, btn);
+      document.querySelector("#container").append(div1);
+
+      function addToCart(elem) {
+        cartItems.push(elem);
+        localStorage.setItem("CartArray", JSON.stringify(cartItems));
+        alert(elem.name + " added to Cart");
+      }
+    });
+  }
+</script>
