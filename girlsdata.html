@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Girls-shop</title>
+    <style>
+      *{
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: cyan;
+      }
+      #main {
+        display: flex;
+        justify-content: space-between;
+      }
+      #container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 30px;
+        width: 70%;
+      }
+      #select {
+        width: 25%;
+      }
+      #box {
+        border: 1px solid black;
+      }
+      #flex {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid blue;
+      }
+      #flex > p:nth-child(2) {
+        text-decoration: line-through;
+      }
+      #flex > div {
+        width: 20%;
+      }
+      #flex > p {
+        padding: 0 4% 0 4%;
+        border: 1px solid black;
+      }
+      #card {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+          rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        display: flex;
+        flex-direction: column;
+      }
+      div2 {
+        padding: 4%;
+      }
+      h3 {
+        max-width: 100%;
+        min-height: 3em;
+      }
+      #cart {
+        display: flex;
+        justify-content: space-between;
+        
+      }
+      button {
+        align-items: center;
+        background-color: blue;
+        color: white;
+        justify-content: flex-end;
+        padding: 2%;
+        width: 50%;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Girls page</h1>
+    <div id="main">
+      <div id="select"></div>
+      <div id="container"></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var girlsData = [
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927775.jpg?size=400x400",
+      name: "Girl's Multi Color Floral Dress",
+      price: 370,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927518.jpg?size=400x400",
+      name: "Kids Dream Little Girls Dress ",
+      price: 299,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/250000/254500/254570/products/1891099815.jpg?size=400x400",
+      name: "Girl's Glamorous Girls T-shirt",
+      price: 445,
+      strikedoffprice: 999,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/274900/274929/products/1897671261.jpg?size=400x400",
+      name: "WonderLaand Girl's Glamorous Girls Diff Top",
+      price: 399,
+      strikedoffprice: 799,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927208.jpg?size=400x400",
+      name: "Fox Life - Kids FeatherSoft Dress ",
+      price: 329,
+      strikedoffprice: 599,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927649.jpg?size=400x400 ",
+      name: " Rainbow Unicorn - Kids FeatherSoft Combo Dress ",
+      price: 599,
+      strikedoffprice: 999,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927199.jpg?size=400x400 ",
+      name: " Football Queen - Kids FeatherSoft Dress ",
+      price: 499,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927814.jpg?size=400x400 ",
+      name: "Dino Fun Dress- Kids FeatherSoft",
+      price: 469,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927271.jpg?size=400x400",
+      name: "Kids Feather Soft Dress  ",
+      price: 299,
+      strikedoffprice: 449,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927256.jpg?size=400x400 ",
+      name: "Kid Girls Dress set",
+      price: 699,
+      strikedoffprice: 999,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/280000/288000/288080/products/1892927755.jpg?size=400x400 ",
+      name: "Kids Angel Dress Set  ",
+      price: 649,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/277400/277418/products/1896678174.jpg?size=400x400",
+      name: "Kids T-shirt Customized shopDisney  ",
+      price: 320,
+      strikedoffprice: 599,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/278200/278200/products/1879303769.jpg?size=400x400 ",
+      name: "Calvin knotted back Tank ",
+      price: 299,
+      strikedoffprice: 499,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1894944975.jpg?size=400x400 ",
+      name: " Little Girls Text Stripped Top",
+      price: 375,
+      strikedoffprice: 499,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/260000/263300/263362/products/1857620877.jpg?size=400x400 ",
+      name: "Little Alexa Bliss Girl's T-Shirt",
+      price: 399,
+      strikedoffprice: 501,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/260000/268500/268595/products/1919374009.jpg?size=400x400 ",
+      name: "Juniors' Yellowstone Wyoming & Montana Tee, Girl's ",
+      price: 379,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/248200/248295/products/1883200317.jpg?size=400x400",
+      name: "Kensie Girl Jancy Babydoll T-Shirt  ",
+      price: 389,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/277400/277418/products/1830853197.jpg?size=400x400 ",
+      name: "Fancy Nancy T-Shirt for Girls ",
+      price: 419,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/277400/277418/products/1830853195.jpg?size=400x400",
+      name: "Fancy Nancy  New T-Shirt for Kid Girls",
+      price: 375,
+      strikedoffprice: 799,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1895871865.jpg?size=400x400 ",
+      name: "Belle Du Jour Big Girls Sleeveless Tee",
+      price: 399,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1892111519.jpg?size=400x400 ",
+      name: "Belle Du Jour Big Girls Short Sleeve Top",
+      price: 249,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/260000/263300/263359/products/1499654585.jpg?size=400x400  ",
+      name: " Big Girls Black Short Sleeved",
+      price: 449,
+      strikedoffprice: 799,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/273200/273200/products/1887814397.jpg?size=400x400 ",
+      name: " Belle Du Jour Big Girls Short Sleeve Boxy  ",
+      price: 620,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/278200/278200/products/1885771437.jpg?size=400x400 ",
+      name: " Calvin Klein CKP Logo Mesh T-Shirt",
+      price: 379,
+      strikedoffprice: 799,
+    },
+    {
+      image_url:
+        " https://img.shop.com/Image/240000/248200/248295/products/1896178811.jpg?size=400x400 ",
+      name: " Laura Biagiotti Influencer T-Shirt",
+      price: 399,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/277400/277418/products/1788624092.jpg?size=400x400 ",
+      name: "Kid's Reebok Classic  Golf  T-Shirt ",
+      price: 399,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/260000/268500/268595/products/1770952220.jpg?size=400x400  ",
+      name: "Kid's Plain Golf T-Shirt",
+      price: 399,
+      strikedoffprice: 799,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/260000/268500/268595/products/1911430345.jpg?size=400x400 ",
+      name: " Girl's complete  Dress Set ",
+      price: 375,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/274900/274929/products/1848007648.jpg?size=400x400",
+      name: "Kid's Plain Golf Round Neck T-Shirt",
+      price: 319,
+      strikedoffprice: 599,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1856211330.jpg?size=400x400",
+      name: "Kid's Round Neck T-Shirt",
+      price: 349,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1856211495.jpg?size=400x400",
+      name: "Kid's Round Neck T-shirt",
+      price: 629,
+      strikedoffprice: 899,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1891489246.jpg?size=400x400",
+      name: "Kid's Girls Sleeveless T-shirt",
+      price: 599,
+      strikedoffprice: 799,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/248200/248295/products/1877866864.jpg?size=400x400",
+      name: "Kid's Girls Sort",
+      price: 349,
+      strikedoffprice: 499,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/260000/268500/268595/products/1891738900.jpg?size=400x400",
+      name: "Kid's Girls Delores Top",
+      price: 479,
+      strikedoffprice: 699,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/240000/243400/243406/products/1894944816.jpg?size=400x400 ",
+      name: "Epic Threads Little Girls Printed Ruffles Top",
+      price: 749,
+      strikedoffprice: 1099,
+    },
+    {
+      image_url:
+        "https://img.shop.com/Image/270000/278200/278200/products/1877558666.jpg?size=400x400",
+      name: "Bella Dahl Tie-Front Shirt",
+      price: 579,
+      strikedoffprice: 799,
+    },
+  ];
+    localStorage.setItem("girlsData", JSON.stringify(girlsData));
+  var girlsData = JSON.parse(localStorage.getItem("girlsData"))||[];
+
+  girlsData.map(function (data) {
+    var div = document.createElement("div");
+    div.setAttribute("id", "card");
+
+    var image = document.createElement("img");
+    image.setAttribute("src", data.image_url);
+
+    var name = document.createElement("h3");
+    name.textContent = data.name;
+
+    var div2 = document.createElement("div");
+    div2.setAttribute("id", "flex");
+
+    var p1 = document.createElement("p");
+    p1.textContent = data.price;
+
+    var p2 = document.createElement("p");
+    p2.textContent = data.strikedoffprice;
+
+    var btn = document.createElement("button");
+    btn.textContent = "Add To Cart";
+
+    var btn1 = document.createElement("button");
+    btn1.textContent = "Check out";
+
+    var div3 = document.createElement("div");
+    div3.setAttribute("id", "cart");
+
+    // var  select =document.createElement("div");
+    // select.setAttribute("id", "select");
+
+    var box = document.createElement("div");
+    box.setAttribute("id", "box");
+
+    // select.append(box, div)
+    div2.append(p1, p2);
+
+    div3.append(btn, btn1);
+
+    div.append(image, name, div2, div3);
+    document.querySelector("#container").append(div);
+  });
+  
+</script>
