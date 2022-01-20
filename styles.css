@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap");
+
 html {
-  font-family: sans-serif;
+  font-family: "Roboto";
 }
 .nav {
   display: flex;
@@ -31,18 +33,42 @@ html {
 .right > * {
   cursor: pointer;
 }
+
+#main{
+  display: flex;
+}
+#sidebar{
+  width: 14%;
+  margin-left: -2%;
+  margin-right: 2%;
+  padding-top: 2%;
+  /* border: 1px solid red; */
+}
 #container {
-  width: 90%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  width: 80%;
+  margin-left: 0%;
+  margin-right: 1%;
+  display: flex;
+  /* grid-template-columns: repeat(3, 1fr); */
   justify-content: space-between;
   gap: 16px;
   padding-top: 2%;
+  flex-wrap: wrap;
 }
 
 .card {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  flex-grow: 1;
+  border: 1px solid #dadbe6;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 350px;
+  min-height: 644px;
+  justify-content: space-between;
+}
+.card:hover {
+  box-shadow: #9597a6 0px 5px 10px 0px;
+  transition: 0.3s;
 }
 .flex {
   display: flex;
@@ -51,38 +77,54 @@ html {
 }
 .card > img {
   width: 100%;
-}
-.name {
-  margin-left: 10px;
-  padding-left: 10px;
-  font-weight: bold;
-}
-.price {
-  /* margin-left: 10px; */
-  font-weight: bold;
-  padding-left: 10px;
-}
-.strikeoff {
-  text-decoration: line-through;
-  margin-left: 10px;
-  padding-left: 10px;
-  margin-right: 10px;
-  padding-right: 10px;
-}
-.btn {
-  margin: auto;
-  height: 25px;
-  margin-left: 33%;
-  padding: 5px;
-  width: 90px;
-  height: 32px;
-  vertical-align: bottom;
-  background-color: steelblue;
-  color: white;
   margin-bottom: 10px;
+}
+
+.price {
+  font-size: 15px;
+  /* padding-left: 4%; */
+  font-weight: 700;
+}
+
+.btn {
+  margin: 0;
+  padding: 0;
+  /* height: 32px ; */
+  /* padding: 5px; */
+  font-size: 14px;
+  width: 50%;
+  font-weight: 700;
+  background-color: #414467;
+  color: white;
   border: 0;
-  border-radius: 5px;
-  align-self: end;
+}
+.btn:hover{
+  background-color: #2b2e4c ;
+  transition: 0.4s;
+}
+
+.btn2 {
+  margin: 0;
+  outline: none;
+  font-size: 14px;
+  width: 50%;
+  font-weight: 700;
+  background-color: #f0f1f7;
+  color: black;
+  border: 0;
+}
+.btn2:hover{
+  background-color: #d2d2e1 ;
+  transition: 0.4s;
+}
+
+.buttons {
+  display: flex;
+  border-top: 1px solid lightgray;
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+  height: 2.5rem;
 }
 #total {
   padding-top: 75px;
@@ -145,25 +187,104 @@ html {
 }
 
 #sortPrice {
-  color: grey;
+  color: black;
   margin-top: 5%;
   margin-bottom: -10%;
-  margin-right: 12px;
   padding-left: 10px;
   padding-right: 5px;
+  margin-left: 1%;
   width: 120px;
-  height: 50px;
-  margin-left: 77%;
+  height: 30px;
+  border: 0;
 }
 
 #selectBrand {
-  /* font-weight: bold; */
   color: black;
   margin-top: 5%;
-  /* margin-bottom: -10%; */
-  /* padding-left: 10px;
-  padding-right: 5px; */
   width: 120px;
   height: 50px;
-  /* margin-left: 7%; */
 }
+
+
+
+
+.sideLists, .subLists {
+  list-style-type: none;
+  font-size: 16px;
+  font-weight: 400;
+  list-style: none;
+  line-height: 1.5em;
+}
+.subLists{
+  margin-top: 5%;
+  margin-left: -8%;
+  font-size: 13px;
+
+}
+
+.cashBack-div{
+  display: flex;
+  min-width: 35%;
+  font-size: 12px;
+  /* padding-left: 4%; */
+  /* height: 2em; */
+  /* justify-content:start; */
+  gap: 2%;
+}
+.soldByDiv{
+  display: flex;
+  gap: 2%;
+  min-width:80%;
+}
+.iconDollar {
+  width: 15px;
+}
+
+.soldBy {
+  /* padding-left: 4%; */
+  font-size: 12px;
+}
+.freeShipping{
+  font-size: 12px;
+  /* padding-left: 4%; */
+  color: #00a8ca;
+}
+.productInfo{
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  height: 25%;
+  padding: 0 5%;
+  gap: 3px;
+  /* line-height: 15px; */
+  justify-items: start;
+  /* justify-content: space-around; */
+}
+.productInfo > *{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.name {
+  font-weight: 400;
+  margin-right: 30%;
+  margin-bottom: 0;
+  text-align: left;
+  width: 90%;
+  /* border: 2px solid red; */
+  /* min-height: 3rem ; */
+}
+
+/* media queries */
+/* 
+@media only screen and (min-width: 321px) and (max-width: 720px) {
+  #container {
+    gap: 
+  }
+}
+@media only screen and (min-width: 0px) and (max-width: 320px) {
+  #container {
+    grid-template-columns: repeat(1, 1fr);
+    padding-top: 4%;
+
+  }
+} */

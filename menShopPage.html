@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Men</title>
     <link rel="stylesheet" href="styles.css" />
+    <style></style>
     <script src="mensData.js"></script>
   </head>
   <body>
@@ -21,19 +22,36 @@
       </div>
     </div>
     <div class="selects">
-      <select id="sortPrice" onchange="sortPrice()">
-        <option value="">Sort by Price</option>
+      <span>Sort:</span
+      ><select id="sortPrice" onchange="sortPrice()">
+        <option value="">Best Match</option>
         <option value="low">Low to High</option>
         <option value="high">High to Low</option>
       </select>
-      <select id="selectBrand" onchange="filterBrand()">
+      <!-- <select id="selectBrand" onchange="filterBrand()">
         <option value="">Filter by Brands</option>
         <option value="Nike">Nike</option>
         <option value="adidas">Adidas</option>
         <option value="puma">Puma</option>
-      </select>
+      </select> -->
     </div>
-    <div id="container"></div>
+    <div id="main">
+      <div id="sidebar">
+        <ul class="sideLists">
+          <li>
+            Men's Clothing Type
+            <ul>
+              <li class="subLists">Shirts</li>
+              <li class="subLists">T-Shirts</li>
+              <li class="subLists">Hoodies</li>
+              <li class="subLists">Briefs</li>
+              <li class="subLists">Socks</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="container"></div>
+    </div>
   </body>
 </html>
 
@@ -66,52 +84,100 @@
   //     console.log(filteredArray);
   //     populate(filteredArray);
   //   }
-
+  // console.log()
   function populate(mensData) {
     document.querySelector("#container").innerHTML = "";
 
     mensData.map(function (elem) {
-      var div1 = document.createElement("div");
-      div1.setAttribute("class", "card");
+      var card = document.createElement("div");
+      card.setAttribute("class", "card");
 
       var image = document.createElement("img");
       image.setAttribute("src", elem.link);
+
+      var productInfo = document.createElement("div");
+      productInfo.setAttribute("class", "productInfo");
 
       var name = document.createElement("p");
       name.setAttribute("class", "name");
       name.textContent = elem.title;
 
+      var sellerDiv = document.createElement("div");
+      sellerDiv.setAttribute("class", "soldByDiv");
+
+      var cartIcon = document.createElement("img");
+      cartIcon.setAttribute(
+        "src",
+        "https://img.shop.com/Image/resources/images/onecart-icon.svg"
+      );
+      cartIcon.setAttribute("class", "iconDollar");
+
+      var soldBy = document.createElement("p");
+      soldBy.setAttribute("class", "soldBy");
+      soldBy.textContent = "Sold by Forza Sports";
+
+      sellerDiv.append(cartIcon, soldBy);
+
       var p1 = document.createElement("p");
       p1.setAttribute("class", "price");
-      p1.textContent = "$" + elem.price;
+      p1.textContent = "$" + Number(elem.price);
 
-      //   var div2 = document.createElement("div");
-      //   div2.setAttribute("class", "flex");
+      var cb = document.createElement("div");
+      cb.setAttribute("class", "cashBack-div");
 
-      //   var p1 = document.createElement("p");
-      //   p1.setAttribute("class", "price");
-      //   p1.textContent = "₹" + elem.price;
+      var cashBack = document.createElement("p");
+      cashBack.setAttribute("class", "cashBack");
+      cashBack.textContent = "+ " + "$" + Number(elem.cashBack);
 
-      //   var p2 = document.createElement("p");
-      //   p2.setAttribute("class", "strikeoff");
-      //   p2.textContent = "₹" + elem.strikedoffprice;
+      var slash = document.createElement("p");
+      slash.setAttribute("class", "slash");
+      slash.textContent = "/";
 
-      //   div2.append(p1, p2);
+      var iconDollar = document.createElement("img");
+      iconDollar.setAttribute(
+        "src",
+        "https://img.shop.com/Image/resources/images/cashback-icon.svg"
+      );
+      iconDollar.setAttribute("class", "iconDollar");
+
+      var p3 = document.createElement("p");
+      p3.setAttribute("class", "p3");
+      p3.textContent = "Cashback";
+
+      var freeShipping = document.createElement("p");
+      freeShipping.setAttribute("class", "freeShipping");
+      freeShipping.textContent = "Free shipping";
+
+      var percentCashBack = document.createElement("p");
+      percentCashBack.setAttribute("class", "percentCashBack");
+      percentCashBack.textContent = Number(elem.percentCashBack) + "%";
+
+      cb.append(cashBack, slash, percentCashBack, iconDollar, p3);
+
+      var buttons = document.createElement("div");
+      buttons.setAttribute("class", "buttons");
+
+      var btnBO = document.createElement("button");
+      btnBO.setAttribute("class", "btn2");
+      btnBO.textContent = "See Details";
+      btnBO.addEventListener("click", function () {});
 
       var btn = document.createElement("button");
       btn.setAttribute("class", "btn");
-      btn.textContent = "Add To Cart";
+      btn.textContent = "Buying Options";
       btn.addEventListener("click", function () {
         addToCart(elem);
       });
 
-      div1.append(image, name, p1, btn);
-      document.querySelector("#container").append(div1);
+      productInfo.append(name, sellerDiv, p1, cb, freeShipping);
+      buttons.append(btnBO, btn);
+      card.append(image, productInfo, buttons);
+      document.querySelector("#container").append(card);
 
       function addToCart(elem) {
         cartItems.push(elem);
         localStorage.setItem("CartArray", JSON.stringify(cartItems));
-        alert(elem.name + " added to Cart");
+        alert(elem.title + " added to Cart");
       }
     });
   }
