@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            padding-left: 400px;
+            padding-top: 80px;
+            display: grid;
+        }
+        input {
+            width: 400px;
+            height: 30px;
+         
+        }
+        /* input:hover{
+            border: rgb(65,68,103)  dashed;
+        } */
+        h4{
+           margin-left: 180px;
+           
+        }
+        #btn{
+            margin-top: 40px;
+            height: 40px;
+            background-color:rgb(65,68,103);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            align-items: center;
+
+        }
+        #btn:hover{
+            background-color: rgb(11, 11, 32);
+        }
+       #button{
+            margin-top: 0px;
+            height: 20px;
+            background-color:white;
+            color: rgb(65,68,103);
+            font-size: 20px;
+            font-weight: bold;
+            align-items: center;
+            width: 380px;
+            border: 1px solid  rgb(65,68,103); 
+            text-align: center;
+            padding: 10px;
+
+        }
+       #button:hover{
+        color: white;
+        background-color: rgb(11, 11, 32);
+          
+        }
+        @media only screen and (min-width:0px) and(max-width:400px){
+            input{
+                width: 100px;
+            }
+            #button{
+                width: 100px;
+            }
+        }
+        
+        @media only screen and (min-width:401px) and(max-width:800px) {
+            input{
+                width: 200px;
+
+            }
+            #button{
+                width: 180px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+   
+    <div id="container">
+<h1>Sign in</h1>
+<form >
+<p>Email address :</p>
+<input id="email" type="email" placeholder="yourname@example.com">
+<p>Password:</p>
+<input id="pass" type="password" placeholder="Please enter your password"><br>
+
+<input id="btn" type="submit" value="Sign In">
+
+<h4>OR</h4>
+
+<div id="button" onclick="window.location.href='signup.html'">Create your new account </div>
+
+</form>
+
+    </div>
+</body>
+</html>
+<script>
+    document.querySelector("form").addEventListener("submit",signin);
+    var regdUser=JSON.parse(localStorage.getItem("userDatabase"));
+    console.log(regdUser);
+
+    function signin(event){
+        event.preventDefault();
+
+        var emailuser=document.querySelector("#email").value;
+        var password=document.querySelector("#pass").value;
+
+         var flag=false;
+        for(var i=0;i<regdUser.length;i++){
+            if(regdUser[i].email==emailuser && regdUser[i].passwd==password){
+            flag=true;
+               break;
+            }  
+        }
+        if(flag==true)
+        {
+            alert("Login successful");
+            window.location.href="signup.html";
+        }
+        else
+        {
+            alert("wrong credential");
+        }
+    }
+</script>
