@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         #container{
+             padding-left: 80px;
+         }
+         #p1{
+             display:flex;
+             flex-wrap: wrap;
+         }
+         #p2{
+            display:flex;
+             flex-wrap: wrap;   
+         }
+         .first{
+             margin-top: 21px;
+         }
+         .second{
+             margin-left: 80px;
+            
+         }
+        .fourth{
+            margin-left: 80px;
+        }
+        input {
+            width: 400px;
+            height: 30px;
+         
+        }
+        /* input:hover{
+            border: rgb(65,68,103)  dashed;
+        } */
+        #btn{
+            margin-top: 40px;
+            height: 40px;
+            background-color:rgb(65,68,103);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            align-items: center;
+        }
+        #btn:hover{
+            background-color: rgb(11, 11, 32);
+        }
+        .grey{
+            color: grey;
+            font-size: 18px;
+            margin-top: -10px;
+        }
+     p{
+         font-size: 18px;
+     }
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+        <h1 class="bold">Create an account</h1>
+        <p class="grey">* Indicates required field</p>
+        <form>
+            <div id="p1">
+                <div class="first">
+            <p">First Name*</p>
+            <input id="name" type="text" placeholder="First name here">
+        </div>
+        <div class="second">
+            <p>Last Name*</p>
+            <input id="lastname" type="text" placeholder="Last name here">
+        </div>
+        </div>
+            <p>Email address*</p>
+            <input id="email" type="email" placeholder="yourname@example.com">
+            <div id="p2">
+            <div class="third">
+            <p>Password*</p>
+            <input id="pass" type="password" placeholder="Please enter your password">
+        </div>
+        <div class="fourth">
+
+            <p>Confirm password*</p>
+            <input id="confirmpass" type="password" placeholder="Please re-enter your password">
+        </div>
+    </div>
+            <p>Enter a mobile number</p>
+            <input id="mobile" type="number" placeholder="Please enter your 10 digit mobile number"><br>
+
+            <input id="btn" type="submit" value="Create your new account">
+      
+
+
+        </form>
+    </div>
+
+</body>
+
+</html>
+<script>
+    document.querySelector("form").addEventListener("submit",formsubmit);
+    var userStack=JSON.parse(localStorage.getItem("userDatabase")) || [];
+    function formsubmit(event){
+        event.preventDefault();
+        var name=document.querySelector("#name").value;
+        var last_name=document.querySelector("#lastname").value;
+        var email=document.querySelector("#email").value;
+        var pass=document.querySelector("#pass").value;
+        var confirmpass=document.querySelector("#confirmpass").value;
+        var mobile=document.querySelector("#mobile").value;
+
+        var userData={
+            userName: name,
+            userlast:last_name,
+            email:email,
+            passwd:pass,
+            cnfpass:confirmpass,
+            mbl:mobile,
+
+        };
+        userStack.push(userData);
+        localStorage.setItem("userDatabase",JSON.stringify(userStack));
+    
+            if(name==""||lastname==""||email==""||pass==""||confirmpass==""||mobile==""){
+                alert("Please enter all the credentials");
+            }
+            else if(pass.length<6){
+                alert("password length must be greater than 6 digit");
+            }
+           else if(mobile.length<10){
+                alert("Enter a valid mobile number");
+            }
+          else if(pass!==confirmpass){
+                alert("Password not matched");
+            }
+            else{
+        alert("signup Successfull");
+
+        window.location.href="login.html";
+            }
+
+        
+
+
+    }
+</script>
