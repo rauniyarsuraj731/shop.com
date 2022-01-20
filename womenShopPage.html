@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Women</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style></style>
+    <script src="womensData2.js"></script>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="left">Men</div>
+      <div class="right">
+        <div onclick="window.location.href='home.html'">Home</div>
+        <div onclick="window.location.href='men.html'">Men</div>
+        <div onclick="window.location.href='women.html'">Women</div>
+        <div onclick="window.location.href='cart.html'">Cart</div>
+        <div onclick="window.location.href='login.html'">Sign In</div>
+        <div onclick="window.location.href='signup.html'">Create Account</div>
+      </div>
+    </div>
+    <div class="selects">
+      <span>Sort:</span
+      ><select id="sortPrice" onchange="sortPrice()">
+        <option value="">Best Match</option>
+        <option value="low">Low to High</option>
+        <option value="high">High to Low</option>
+      </select>
+      <!-- <select id="selectBrand" onchange="filterBrand()">
+        <option value="">Filter by Brands</option>
+        <option value="Nike">Nike</option>
+        <option value="adidas">Adidas</option>
+        <option value="puma">Puma</option>
+      </select> -->
+    </div>
+    <div id="main">
+      <div id="sidebar">
+        <ul class="sideLists">
+          <li>
+            Women's Clothing Type
+            <ul>
+              <li class="subLists">Dresses</li>
+              <li class="subLists">Leggings</li>
+              <li class="subLists">Hoodies</li>
+              <li class="subLists">Underwear</li>
+              <li class="subLists">Tops</li>
+              <li class="subLists">Shirts</li>
+              <li class="subLists">T-Shirts</li>
+              <li class="subLists">Sweaters</li>
+              <li class="subLists">Jackets</li>
+              <li class="subLists">Coats</li>
+              <li class="subLists">Socks</li>
+              <li class="subLists">Bathrobe</li>
+              <li class="subLists">Pajamas</li>
+              <li class="subLists">Miscellaneous</li>
+
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div id="container"></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var womensData = JSON.parse(localStorage.getItem("womenData")) || [];
+  var cartItems = JSON.parse(localStorage.getItem("CartArray")) || [];
+
+  populate(womensData);
+
+  function sortPrice() {
+    var selected = document.querySelector("#sortPrice").value;
+    console.log(selected);
+    if (selected == "high") {
+      womensData.sort(function (a, b) {
+        return Number(b.price) - Number(a.price);
+      });
+    } else if (selected == "low") {
+      womensData.sort(function (a, b) {
+        return Number(a.price) - Number(b.price);
+      });
+    }
+    populate(womensData);
+  }
+
+  //   function filterBrand() {
+  //     var selected = document.querySelector("#selectBrand").value;
+  //     var filteredArray = womensData.filter(function (elem) {
+  //       return elem.brand == selected;
+  //     });
+  //     console.log(filteredArray);
+  //     populate(filteredArray);
+  //   }
+  // console.log()
+  function populate(womensData) {
+    document.querySelector("#container").innerHTML = "";
+
+    womensData.map(function (elem) {
+      var card = document.createElement("div");
+      card.setAttribute("class", "card");
+
+      var image = document.createElement("img");
+      image.setAttribute("src", elem.link);
+
+      var productInfo = document.createElement("div");
+      productInfo.setAttribute("class", "productInfo");
+
+      var name = document.createElement("p");
+      name.setAttribute("class", "name");
+      name.textContent = elem.title;
+
+      var sellerDiv = document.createElement("div");
+      sellerDiv.setAttribute("class", "soldByDiv");
+
+      var cartIcon = document.createElement("img")
+      cartIcon.setAttribute("src", "https://img.shop.com/Image/resources/images/onecart-icon.svg");
+      cartIcon.setAttribute("class", "iconDollar")
+
+      var soldBy = document.createElement("p");
+      soldBy.setAttribute("class", "soldBy");
+      soldBy.textContent = "Sold by Forza Sports"
+      
+      sellerDiv.append(cartIcon, soldBy);
+
+      var p1 = document.createElement("p");
+      p1.setAttribute("class", "price");
+      p1.textContent = "$" + Number(elem.price);
+
+      var cb = document.createElement("div");
+      cb.setAttribute("class", "cashBack-div");
+
+      var cashBack = document.createElement("p");
+      cashBack.setAttribute("class", "cashBack");
+      cashBack.textContent = "+ " + "$" + Number(elem.cashBack);
+
+      var slash = document.createElement("p");
+      slash.setAttribute("class", "slash");
+      slash.textContent = "/";
+
+      var iconDollar = document.createElement("img");
+      iconDollar.setAttribute("src", "https://img.shop.com/Image/resources/images/cashback-icon.svg");
+      iconDollar.setAttribute("class", "iconDollar");
+
+      var p3 = document.createElement("p");
+      p3.setAttribute("class", "p3");
+      p3.textContent=("Cashback");
+
+      var freeShipping = document.createElement("p")
+      freeShipping.setAttribute("class", "freeShipping")
+      freeShipping.textContent = "Free shipping"
+
+
+
+      var percentCashBack = document.createElement("p");
+      percentCashBack.setAttribute("class", "percentCashBack");
+      percentCashBack.textContent = Number(elem.percentCashBack) + "%";
+
+      cb.append(cashBack, slash, percentCashBack, iconDollar, p3);
+
+      var buttons = document.createElement("div");
+      buttons.setAttribute("class", "buttons");
+
+      var btnBO = document.createElement("button");
+      btnBO.setAttribute("class", "btn2");
+      btnBO.textContent = "See Details";
+      btnBO.addEventListener("click", function () {});
+
+      var btn = document.createElement("button");
+      btn.setAttribute("class", "btn");
+      btn.textContent = "Buying Options";
+      btn.addEventListener("click", function () {
+        addToCart(elem);
+      });
+
+      productInfo.append(name, sellerDiv, p1, cb, freeShipping)
+      buttons.append(btnBO, btn);
+      card.append(image, productInfo ,buttons);
+      document.querySelector("#container").append(card);
+
+      function addToCart(elem) {
+        cartItems.push(elem);
+        localStorage.setItem("CartArray", JSON.stringify(cartItems));
+        alert(elem.title + " added to Cart");
+      }
+    });
+  }
+</script>
