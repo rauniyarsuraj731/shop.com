@@ -4,4 +4,4 @@ Our site features a Home Page, Men's Clothing section, Women's Clothing section 
 
 For Payment: Enter 123 as card number, 123 as CVV and 12/25 for expiry date. For OTP: Enter 1234.
  
- https://shop-com-clone.netlify.app/
+https://colneshopdotcom.netlify.app
