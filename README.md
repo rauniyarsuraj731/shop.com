@@ -7,8 +7,7 @@ Shop.com is a website that is used for extensive shippong of clothing and  goods
 In this project we have tried to make a look alike clone of Shop.com website. With our efforts and the technology stack, that we have learned till now in Unit-2 in the masai school, we were able to clone the front end with same looking & features.
 
 Technology Stack Used:
-
-Languages
+Languages:<br/>
 HTML
 CSS
 Javascript
