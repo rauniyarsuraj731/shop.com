@@ -1,6 +1,6 @@
 Shop.com(Clone)
 
-Project: make a clone of https://shop.com/ site
+Project: make a clone of https://shop.com
 
 Shop.com is a website that is used for extensive shippong of clothing and  goods.
 
@@ -18,6 +18,7 @@ Limitations:
 All pages are not responsive yet , those pages are might not be properly visible on small screen devices. (Recomended Resolution: 1366 x 768 )
 
 Team Members and Contributors 😇 :
+
 👤 Suraj Kumar Gupta 
 
 👤 Adnan Khateeb
