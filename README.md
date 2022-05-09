@@ -8,12 +8,12 @@ In this project we have tried to make a look alike clone of Shop.com website. Wi
 
 Technology Stack Used:<br/>
 Languages:<br/>
-<ul>
+<ol>
  <li>HTML</li><br/>
  <li>CSS</li><br/>
  <li>Javascript</li><br/>
  <li>End Notes 📑</li><br/>
- </ul>
+ </ol>
 
 In this project we were tried to achieve a near to perfect clone of the original website as much as possible with very limited knowledge of javascript, css, HTML and local databases. This entire journey of cloning this project has given us experiences and we have learned lots of things by applying our knowledge to the real website and it gave us a lot of confidence. If we have more time we can able to add more products.
 
